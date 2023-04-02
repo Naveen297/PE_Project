@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style2.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      #login-form {
+        background-color: #fff;
+        border-radius: 10px;
+        border-color: cadetblue;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        margin-top: 50px;
+      }
+      #login-form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1;
+        border-color: #3e8e41;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      #login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1;
+        border-color: #3e8e41;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      #login-form input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: 2;
+        border-radius: 5px;
+        border-color: cadetblue;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      #login-form input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      #error-message {
+        color: red;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <img src="images/logo.png" id="logo" alt="" />
+
+      <nav class="navbar">
+        <a href="#">home</a>
+        <a href="#">about</a>
+        <a href="#">services</a>
+        <a href="#">gallery</a>
+        <a href="#">contact</a>
+      </nav>
+
+      <div class="icons">
+        <div id="menubar" class="fas fa-bars"></div>
+        <a href="#">contact</a>
+      </div>
+    </header>
+    <div id="login-form">
+      <h1>Login</h1>
+      <form action="">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+
+        <input type="submit" value="Login" />
+        <div id="error-message"></div>
+      </form>
+    </div>
+    <script>
+      //if username="admin" and password="admin" then redirect to patient.html
+      //else display error message
+
+      //get the form
+      const form = document.querySelector("form");
+      //get the error message
+      const errorMessage = document.querySelector("#error-message");
+
+      //add event listener to the form
+
+      form.addEventListener("submit", (e) => {
+        //prevent the form from submitting
+        e.preventDefault();
+
+        //get the username and password
+        const username = document.querySelector("#username").value;
+        const password = document.querySelector("#password").value;
+
+        //check if the username and password are correct
+        if (username === "admin" && password === "admin") {
+          //redirect to patient.html
+          window.location.href = "patient.html";
+        } else {
+          //display error message
+          errorMessage.textContent = "Invalid username or password";
+        }
+      });
+    </script>
+  </body>
+</html>

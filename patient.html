@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style2.css" />
+    <title>Patient Portal</title>
+    <style>
+      /* Add your custom CSS styles here */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        margin-top: 20px;
+        font-size: 36px;
+        text-align: center;
+      }
+      table {
+        margin: 30px auto;
+        border-collapse: collapse;
+        border: 2px solid #ddd;
+        width: 80%;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .record-history {
+        margin-top: 30px;
+        border: 2px solid #ddd;
+        padding: 20px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .record-history h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .record-history p {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <img src="images/logo.png" id="logo" alt="" />
+
+      <nav class="navbar">
+        <a href="#">home</a>
+        <a href="#">about</a>
+        <a href="#">services</a>
+        <a href="#">gallery</a>
+        <a href="#">contact</a>
+      </nav>
+
+      <div class="icons">
+        <div id="menubar" class="fas fa-bars"></div>
+        <a href="#">contact</a>
+      </div>
+    </header>
+
+    <h1>Welcome, Jane Doe</h1>
+
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>Abhinav Sharma</td>
+      </tr>
+      <tr>
+        <td>Age</td>
+        <td>32</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>12/88 Block 13 Mall Road Jaipur, RJ</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>9876543873</td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>Male</td>
+      </tr>
+    </table>
+
+    <div class="record-history">
+      <h2>Record History</h2>
+      <p><strong>Last visit:</strong> February 1, 2023</p>
+      <p><strong>Diagnosis:</strong> Hypertension</p>
+      <p>
+        <strong>Medications:</strong> Lisinopril (20 mg), Metoprolol (50 mg)
+      </p>
+      <p>
+        <strong>Desires:</strong> Patient expressed interest in exploring
+        non-medication options for blood pressure management.
+      </p>
+    </div>
+    <div class="record-history">
+      <h2>Record History</h2>
+      <p><strong>Last visit:</strong> March 15, 2023</p>
+      <p><strong>Diagnosis:</strong> Diabetes</p>
+      <p>
+        <strong>Medications:</strong> Metformin (500 mg), Insulin glargine (20
+        units)
+      </p>
+      <p>
+        <strong>Desires:</strong> Patient expressed interest in learning more
+        about diabetic diet plans and exercise routines to help manage blood
+        sugar levels.
+      </p>
+    </div>
+    <button id="download-btn">Download Records</button>
+    <script>
+      // get the download button element
+      const downloadBtn = document.getElementById("download-btn");
+
+      // add an event listener to the button
+      downloadBtn.addEventListener("click", () => {
+        // create a new file object with the data to be downloaded
+        const patientData = {
+          name: "Abhinav Sharma",
+          age: 32,
+          gender: "Male",
+          address: "12/88 Block 13 Mall Road Jaipur, RJ",
+          recordHistory: [
+            {
+              date: "February 1, 2023",
+              diagnosis: "Hypertension",
+              medications: "Lisinopril (20 mg), Metoprolol (50 mg)",
+              desires:
+                "Patient expressed interest in exploring non-medication options for blood pressure management.",
+            },
+            {
+              date: "March 15, 2023",
+              diagnosis: "Diabetes",
+              medications: "Metformin (500 mg), Insulin glargine (20 units)",
+              desires:
+                "Patient expressed interest in learning more about diabetic diet plans and exercise routines to help manage blood sugar levels.",
+            },
+          ],
+        };
+
+        const data =
+          "Name: " +
+          patientData.name +
+          "\n" +
+          "Age: " +
+          patientData.age +
+          "\n" +
+          "Gender: " +
+          patientData.gender +
+          "\n" +
+          "Address: " +
+          patientData.address +
+          "\n\n" +
+          "Record History:\n" +
+          patientData.recordHistory
+            .map(
+              (record) =>
+                "Date: " +
+                record.date +
+                "\n" +
+                "Diagnosis: " +
+                record.diagnosis +
+                "\n" +
+                "Medications: " +
+                record.medications +
+                "\n" +
+                "Desires: " +
+                record.desires +
+                "\n\n"
+            )
+            .join("");
+
+        const blob = new Blob([data], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+
+        // create a download link
+        const downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "patient_records.txt";
+
+        // add the download link to the DOM and click it to initiate download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      });
+    </script>
+
+    <footer class="footer">
+      <p>&copy; 2023 My Healthcare Website. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
